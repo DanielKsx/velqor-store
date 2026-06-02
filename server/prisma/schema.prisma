@@ -6,6 +6,14 @@ datasource db {
   provider = "mysql"
 }
 
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  COMPLETED
+  CANCELLED
+}
+
 model Product {
   id          String         @id @default(uuid())
   name        String
@@ -27,4 +35,29 @@ model ProductImage {
   alt       String
   order     Int
   product   Product @relation(fields: [productId], references: [id])
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  customerAddress String
+  totalPrice      Decimal
+  status          OrderStatus @default(PENDING)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  items           OrderItem[]
+}
+
+model OrderItem {
+  id                   String  @id @default(uuid())
+  orderId              String
+  productIdSnapshot    String
+  productNameSnapshot  String
+  productPriceSnapshot Decimal
+  quantity             Int
+  note                 String?
+  totalPrice           Decimal
+  order                Order   @relation(fields: [orderId], references: [id])
 }
