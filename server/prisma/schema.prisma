@@ -14,18 +14,40 @@ enum OrderStatus {
   CANCELLED
 }
 
+enum ProductCategory {
+  HOODIE
+  TSHIRT
+  LONGSLEEVE
+  CAP
+}
+
+enum ProductColor {
+  BLACK
+  WHITE
+  GREY
+}
+
+enum ProductSize {
+  XS
+  S
+  M
+  L
+  XL
+}
+
 model Product {
-  id          String         @id @default(uuid())
+  id          String           @id @default(uuid())
+  sku         String           @unique
   name        String
-  slug        String         @unique
+  slug        String           @unique
   description String
   price       Decimal
-  category    String
+  category    ProductCategory
   mainImage   String
-  stock       Int
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
   images      ProductImage[]
+  variants    ProductVariant[]
 }
 
 model ProductImage {
@@ -35,6 +57,20 @@ model ProductImage {
   alt       String
   order     Int
   product   Product @relation(fields: [productId], references: [id])
+
+  @@unique([productId, order])
+}
+
+model ProductVariant {
+  id        String       @id @default(uuid())
+  productId String
+  color     ProductColor
+  size      ProductSize
+  stock     Int
+
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([productId, color, size])
 }
 
 model Order {
@@ -51,13 +87,15 @@ model Order {
 }
 
 model OrderItem {
-  id                   String  @id @default(uuid())
+  id                   String       @id @default(uuid())
   orderId              String
   productIdSnapshot    String
   productNameSnapshot  String
+  productColorSnapshot ProductColor
+  productSizeSnapshot  ProductSize
   productPriceSnapshot Decimal
   quantity             Int
   note                 String?
   totalPrice           Decimal
-  order                Order   @relation(fields: [orderId], references: [id])
+  order                Order        @relation(fields: [orderId], references: [id])
 }
