@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { PrismaClient, ProductCategory, ProductColor, ProductSize } from "@prisma/client";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
+import bcrypt from 'bcrypt'
 
 const databaseUrl = new URL(process.env.DATABASE_URL as string);
 
@@ -31,7 +32,7 @@ const sizes = [
 ] as const;
 
 const products = [
-    {   
+    {
         sku: 'VLQ-HOD-001',
         name: 'Oversized Hoodie',
         slug: 'oversized-hoodie',
@@ -117,6 +118,15 @@ const products = [
 async function main(): Promise<void> {
     console.log('Seeding database...');
 
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    if (!adminEmail || !adminPassword) {
+        throw new Error('Admin_EMAIL or ADMIN_PASSWORD is missing');
+    }
+
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
     for (const product of products) {
         const savedProduct = await prisma.product.upsert({
             where: {
@@ -128,29 +138,29 @@ async function main(): Promise<void> {
 
         console.log(`Seeded product: ${savedProduct.name}`);
 
-    for (const color of colors) {
-        for (const size of sizes) {
-            await prisma.productVariant.upsert({
-                where: {
-                    productId_color_size: {
+        for (const color of colors) {
+            for (const size of sizes) {
+                await prisma.productVariant.upsert({
+                    where: {
+                        productId_color_size: {
+                            productId: savedProduct.id,
+                            color,
+                            size,
+                        },
+                    },
+                    update: {
+                        stock: 10,
+                    },
+                    create: {
                         productId: savedProduct.id,
                         color,
                         size,
+                        stock: 10,
                     },
-                },
-                update: {
-                    stock: 10,
-                },
-                create: {
-                    productId: savedProduct.id,
-                    color,
-                    size,
-                    stock: 10,
-                },
-            });
+                });
+            }
         }
     }
-}
 
     for (const product of products) {
         const existingProduct = await prisma.product.findUnique({
@@ -184,6 +194,19 @@ async function main(): Promise<void> {
             });
         }
     }
+    await prisma.adminUser.upsert({
+        where: {
+            email: adminEmail,
+        },
+        update: {
+            password: hashedPassword,
+        },
+        create: {
+            email: adminEmail,
+            password: hashedPassword,
+        },
+    });
+    console.log(`Seeded admin: ${adminEmail}`);
 }
 
 main()
