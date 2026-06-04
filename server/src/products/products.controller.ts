@@ -13,7 +13,6 @@ export class ProductsController {
 
   @Get(':slug/:sku')
   findOne(
-    @Param('slug') slug: string,
     @Param('sku') sku: string,
   ) {
     return this.productsService.findBySku(sku);

@@ -1,5 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
+
+const productInclude = {
+  images: {
+    orderBy: {
+      order: 'asc',
+    },
+  },
+  variants: true,
+} satisfies Prisma.ProductInclude;
 
 @Injectable()
 export class ProductsService {
@@ -8,10 +18,7 @@ export class ProductsService {
 
   async findAll() {
     return this.prisma.product.findMany({
-      include: {
-        images: true,
-        variants: true,
-      }
+      include: productInclude,
     });
   }
 
@@ -20,10 +27,7 @@ export class ProductsService {
       where: {
         sku,
       },
-      include: {
-        images: true,
-        variants: true,
-      },
+      include: productInclude,
     });
 
     if (!product) {
