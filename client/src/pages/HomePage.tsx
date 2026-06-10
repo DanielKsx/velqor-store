@@ -6,7 +6,23 @@ import Container from '../components/container/Container';
 
 function HomePage() {
     const { products, isLoading, error } = useProducts();
-    
+
+    if (isLoading) {
+        return (
+            <Container>
+                <p>Loading products...</p>
+            </Container>
+        );
+    }
+
+    if (error) {
+        return (
+            <Container>
+                <p>{error}</p>
+            </Container>
+        );
+    }
+
     return (
         <main className={styles.homePage}>
             <section className={styles.hero}>
@@ -15,16 +31,16 @@ function HomePage() {
                 <Link to="/" className={styles.heroButton}>Shop Now</Link>
             </section>
             <Container>
-            <section className={styles.productsSection}>
-                <h2 className={styles.sectionTitle}>Featured Products</h2>
-                <div className={styles.productsGrid}>
-                    {products.map((product) => (
-                        <Link key={product.id} to={`/products/${product.slug}/${product.sku}`} className={styles.productLink}>
-                            <ProductCard product={product} />
-                        </Link>
-                    ))}
-                </div>
-            </section>
+                <section className={styles.productsSection}>
+                    <h2 className={styles.sectionTitle}>Featured Products</h2>
+                    <div className={styles.productsGrid}>
+                        {products.map((product) => (
+                            <Link key={product.id} to={`/products/${product.slug}/${product.sku}`} className={styles.productLink}>
+                                <ProductCard product={product} />
+                            </Link>
+                        ))}
+                    </div>
+                </section>
             </Container>
         </main>
     )
