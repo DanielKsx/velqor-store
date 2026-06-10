@@ -5,12 +5,21 @@
 
 .imageSection {
     flex: 1;
+}
 
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .mainImage {
     min-height: 500px;
     background-color: var(--color-gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .detailsSection {
@@ -24,15 +33,13 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
-
 }
 
-.purchaseSection {
+.productHeader {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xl);
+    gap: var(--space-md);
 }
-
 
 .productTitle {
     font-size: 2.5rem;
@@ -42,20 +49,125 @@
     font-size: 1.5rem;
 }
 
-.productHeader {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-}
-
 .productDetails {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
 }
 
+.purchaseSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.optionGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.optionLabel {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.colorSelector {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.sizeSelector {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.optionButton {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-gray-300);
+    background: transparent;
+    cursor: pointer;
+}
+
+.optionButton:hover {
+    border-color: var(--color-black);
+}
+
+.optionButtonActive {
+    border-color: var(--color-black);
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.quantity {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.quantityControl {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    border: 1px solid var(--color-black);
+}
+
+.quantityButton {
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.quantityValue {
+    width: 60px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .addToCartButton {
+    width: 100%;
     padding: var(--space-md);
     border: 1px solid var(--color-black);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.addToCartButton:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
+.cartError {
+    color: red;
+}
+
+@media (max-width: 900px) {
+    .productPage {
+        flex-direction: column;
+    }
+
+    .mainImage {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 600px) {
+    .productTitle {
+        font-size: 2rem;
+    }
+
+    .mainImage {
+        min-height: 320px;
+    }
+
+    .colorSelector,
+    .sizeSelector {
+        flex-wrap: wrap;
+    }
 }
