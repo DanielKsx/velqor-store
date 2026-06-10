@@ -2,6 +2,7 @@ import styles from './CartPage.module.scss'
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Container from "../components/container/Container";
 import { removeFromCart } from "../store/slices/cartSlice";
+import { Link } from 'react-router-dom';
 
 function CartPage() {
     const cartItems = useAppSelector((state) => state.cart);
@@ -47,6 +48,7 @@ function CartPage() {
                             <h2>Total:</h2>
                             <p>{totalPrice.toFixed(2)} PLN</p>
                         </div>
+                        <Link to="/checkout" className={styles.checkoutButton}>Go to checkout</Link>
                     </>
                 )}
 

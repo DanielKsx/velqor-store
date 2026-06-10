@@ -1,0 +1,96 @@
+.checkoutPage {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: var(--space-2xl) 0;
+}
+
+.checkoutTitle {
+    margin-bottom: var(--space-xl);
+    font-size: 2rem;
+}
+
+.checkoutForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.label {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    padding: var(--space-md);
+    border: 1px solid var(--color-gray-300);
+    background-color: var(--color-white);
+    font: inherit;
+}
+
+.input:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-black);
+}
+
+.textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.submitButton {
+    padding: var(--space-md);
+    border: 1px solid var(--color-black);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.submitButton:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
+
+.successPage {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: var(--space-2xl) 0;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: center;
+}
+
+.successTitle {
+    font-size: 2rem;
+}
+
+.successMessage {
+    color: var(--color-gray-500);
+}
+
+.continueShoppingButton {
+    padding: var(--space-md) var(--space-xl);
+    border: 1px solid var(--color-black);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.continueShoppingButton:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
