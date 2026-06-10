@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { clearCart } from "../store/slices/cartSlice";
 import { Link } from "react-router-dom";
+import { createOrder } from "../api/ordersApi";
 
 function CheckoutPage() {
     const [customerName, setCustomerName] = useState('');
@@ -51,17 +52,7 @@ function CheckoutPage() {
         };
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            });
-
-            if (!response.ok) {
-                throw new Error('Could not place order');
-            }
+            await createOrder(payload);
 
             setIsSuccess(true);
 
