@@ -17,9 +17,10 @@ type RemoveCartItemPayload = {
     size: string;
 }
 
+const initialState: CartItem[] = [];
 const cartSlice = createSlice({
     name: 'cart',
-    initialState: [] as CartItem[],
+    initialState,
     reducers: {
 
         addToCart(state, action: PayloadAction<CartItem>) {

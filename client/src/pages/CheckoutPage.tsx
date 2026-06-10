@@ -17,6 +17,18 @@ function CheckoutPage() {
     const cartItems = useAppSelector((state) => state.cart);
     const dispatch = useAppDispatch();
 
+    if (cartItems.length === 0 && !isSuccess) {
+    return (
+        <Container>
+            <section className={styles.emptyCheckout}>
+                <h1>Your cart is empty</h1>
+                <p>Add products to your cart before checkout.</p>
+                <Link to="/" className={styles.continueShoppingButton}>Continue Shopping</Link>
+            </section>
+        </Container>
+    );
+}
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
