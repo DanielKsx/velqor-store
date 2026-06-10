@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import type { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-
+import { ADMIN_ACCESS_TOKEN_COOKIE } from '../constants/auth.constants';
 import { PrismaService } from '../../prisma/prisma.service';
 
 interface JwtPayload {
@@ -22,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         super({
             jwtFromRequest: ExtractJwt.fromExtractors([
                 (request: Request) => {
-                    return request?.cookies?.admin_access_token ?? null;
+                    return request?.cookies?.[ADMIN_ACCESS_TOKEN_COOKIE] ?? null;
                 },
             ]),
             ignoreExpiration: false,

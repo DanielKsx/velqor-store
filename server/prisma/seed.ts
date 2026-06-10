@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { PrismaClient, ProductCategory, ProductColor, ProductSize } from "@prisma/client";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 
 const databaseUrl = new URL(process.env.DATABASE_URL as string);
 
