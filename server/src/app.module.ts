@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -19,6 +21,10 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
         limit: 100,
       },
     ]),
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), 'public'),
+      serveRoot: '/',
+    }),
     ProductsModule,
     OrdersModule,
     AuthModule

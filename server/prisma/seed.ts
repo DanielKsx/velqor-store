@@ -16,7 +16,7 @@ const adapter = new PrismaMariaDb({
 
 const prisma = new PrismaClient({ adapter });
 
-const imageTypes = ['front', 'back', 'detail'] as const;
+
 const colors = [
     ProductColor.BLACK,
     ProductColor.WHITE,
@@ -40,7 +40,7 @@ const products = [
             'Premium oversized hoodie made from heavyweight cotton. Designed for everyday wear with a relaxed fit and minimal branding.',
         price: 299.99,
         category: ProductCategory.HOODIE,
-        mainImage: 'products/oversized-hoodie/main.jpg',
+        mainImage: '/images/products/oversized-hoodie.png',
     },
     {
         sku: 'VLQ-HOD-002',
@@ -50,7 +50,7 @@ const products = [
             'Clean everyday hoodie with a timeless silhouette and premium fabric.',
         price: 279.99,
         category: ProductCategory.HOODIE,
-        mainImage: 'products/essential-hoodie/main.jpg',
+        mainImage: '/images/products/essential-hoodie.png',
     },
     {
         sku: 'VLQ-HOD-003',
@@ -60,7 +60,7 @@ const products = [
             'Heavyweight cotton hoodie built for comfort, durability and everyday wear.',
         price: 329.99,
         category: ProductCategory.HOODIE,
-        mainImage: 'products/heavyweight-hoodie/main.jpg',
+        mainImage: '/images/products/heavyweight-hoodie.png',
     },
     {
         sku: 'VLQ-TSH-001',
@@ -70,7 +70,7 @@ const products = [
             'Minimal premium t-shirt designed for everyday use.',
         price: 119.99,
         category: ProductCategory.TSHIRT,
-        mainImage: 'products/core-tshirt/main.jpg',
+        mainImage: '/images/products/core-tshirt.png',
     },
     {
         sku: 'VLQ-TSH-002',
@@ -80,7 +80,7 @@ const products = [
             'Relaxed boxy fit t-shirt with heavyweight cotton construction.',
         price: 129.99,
         category: ProductCategory.TSHIRT,
-        mainImage: 'products/boxy-fit-tshirt/main.jpg',
+        mainImage: '/images/products/boxy-fit-tshirt.png',
     },
     {
         sku: 'VLQ-TSH-003',
@@ -90,7 +90,7 @@ const products = [
             'Premium t-shirt featuring subtle VELQOR branding.',
         price: 139.99,
         category: ProductCategory.TSHIRT,
-        mainImage: 'products/signature-tshirt/main.jpg',
+        mainImage: '/images/products/signature-tshirt.png',
     },
     {
         sku: 'VLQ-LNG-001',
@@ -100,7 +100,7 @@ const products = [
             'Long sleeve shirt with a clean silhouette and premium feel.',
         price: 169.99,
         category: ProductCategory.LONGSLEEVE,
-        mainImage: 'products/shadow-longsleeve/main.jpg',
+        mainImage: '/images/products/shadow-longsleeve.png',
     },
     {
         sku: 'VLQ-CAP-001',
@@ -110,7 +110,7 @@ const products = [
             'Classic cap featuring embroidered VELQOR branding.',
         price: 89.99,
         category: ProductCategory.CAP,
-        mainImage: 'products/logo-cap/main.jpg',
+        mainImage: '/images/products/logo-cap.png',
     },
 ];
 
@@ -173,26 +173,24 @@ async function main(): Promise<void> {
             throw new Error(`Product not found: ${product.slug}`);
         }
 
-        for (const [index, imageType] of imageTypes.entries()) {
-            await prisma.productImage.upsert({
-                where: {
-                    productId_order: {
-                        productId: existingProduct.id,
-                        order: index + 1,
-                    },
-                },
-                update: {
-                    url: `products/${product.slug}/${imageType}.jpg`,
-                    alt: `${product.name} ${imageType}`,
-                },
-                create: {
+        await prisma.productImage.upsert({
+            where: {
+                productId_order: {
                     productId: existingProduct.id,
-                    url: `products/${product.slug}/${imageType}.jpg`,
-                    alt: `${product.name} ${imageType}`,
-                    order: index + 1,
+                    order: 1,
                 },
-            });
-        }
+            },
+            update: {
+                url: product.mainImage,
+                alt: product.name,
+            },
+            create: {
+                productId: existingProduct.id,
+                url: product.mainImage,
+                alt: product.name,
+                order: 1,
+            },
+        });
     }
     await prisma.adminUser.upsert({
         where: {
