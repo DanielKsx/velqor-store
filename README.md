@@ -8,6 +8,12 @@ The application was built using React, NestJS, Prisma and MariaDB.
 
 ---
 
+## Live Demo:
+https://velqor-store.onrender.com
+
+## API:
+https://velqor-api-bptu.onrender.com/api/products
+
 ## Project Goals
 
 The main goal of this project was to practice building a complete full stack application from scratch and gain hands-on experience with:
