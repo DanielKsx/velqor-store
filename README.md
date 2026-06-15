@@ -8,6 +8,20 @@ The application was built using React, NestJS, Prisma and MariaDB.
 
 ---
 
+## Project Goals
+
+The main goal of this project was to practice building a complete full stack application from scratch and gain hands-on experience with:
+
+* React
+* NestJS
+* Prisma
+* Authentication
+* Database design
+* API development
+* Application security
+
+---
+
 ## What can users do?
 
 * Browse products
@@ -31,24 +45,12 @@ The project includes protected admin endpoints that allow:
 
 ### Demo Admin Credentials
 
-```txt
-Email: admin@velqor.pl
-Password: VelqorDemo123!
-```
+Demo credentials are configured through environment variables and database seed.
 
 ### Admin Login Endpoint
 
 ```http
 POST /api/auth/admin/login
-```
-
-Example request body:
-
-```json
-{
-  "email": "admin@velqor.pl",
-  "password": "VelqorDemo123!"
-}
 ```
 
 ---
@@ -126,7 +128,7 @@ PATCH /api/admin/orders/:id/status
 ### Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/velqor-store.git
+git clone https://github.com/DanielKsx/velqor-store.git
 cd velqor-store
 ```
 
@@ -146,8 +148,8 @@ DATABASE_URL=
 
 FRONTEND_URL=http://localhost:5173
 
-ADMIN_EMAIL=admin@velqor.pl
-ADMIN_PASSWORD=VelqorDemo123!
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
 
 JWT_SECRET=
 ```
@@ -250,7 +252,6 @@ velqor-store
 ```
 
 ---
-
 
 ## Possible Future Improvements
 
