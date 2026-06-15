@@ -89,22 +89,22 @@ function CheckoutPage() {
 
                     <div className={styles.formGroup}>
                         <label htmlFor="customerName" className={styles.label}>Name</label>
-                        <input id="customerName" type="text" className={styles.input} value={customerName} onChange={(event) => setCustomerName(event.target.value)} />
+                        <input id="customerName" type="text" className={styles.input} value={customerName} onChange={(event) => setCustomerName(event.target.value)} placeholder="John Knee" required />
                     </div>
 
                     <div className={styles.formGroup}>
                         <label htmlFor="customerEmail" className={styles.label}>Email</label>
-                        <input id="customerEmail" type="email" className={styles.input} value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} />
+                        <input id="customerEmail" type="email" className={styles.input} value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} placeholder="john@example.com" required />
                     </div>
 
                     <div className={styles.formGroup}>
                         <label htmlFor="customerPhone" className={styles.label}>Phone</label>
-                        <input id="customerPhone" type="text" className={styles.input} value={customerPhone} onChange={(event) => setCustomerPhone(event.target.value)} />
+                        <input id="customerPhone" type="text" className={styles.input} value={customerPhone} onChange={(event) => setCustomerPhone(event.target.value)} placeholder="+48 733 333 333" required />
                     </div>
 
                     <div className={styles.formGroup}>
                         <label htmlFor="customerAddress" className={styles.label}>Address</label>
-                        <textarea id="customerAddress" className={styles.textarea} value={customerAddress} onChange={(event) => setCustomerAddress(event.target.value)} />
+                        <textarea id="customerAddress" className={styles.textarea} value={customerAddress} onChange={(event) => setCustomerAddress(event.target.value)} placeholder="Street, city, postal code" required/>
                     </div>
 
                     <button type="submit" className={styles.submitButton} disabled={isSubmitting}>{isSubmitting ? 'Placing order...' : 'Place order'}</button>

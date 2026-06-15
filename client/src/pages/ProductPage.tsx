@@ -60,6 +60,7 @@ function ProductPage() {
             productId: selectedProduct.id,
             name: selectedProduct.name,
             price: selectedProduct.price,
+            mainImage: selectedProduct.mainImage,
             color: selectedColor,
             size: selectedSize,
             quantity,

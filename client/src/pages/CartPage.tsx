@@ -11,7 +11,6 @@ function CartPage() {
     const totalPrice = cartItems.reduce((sum, item) => {
         return sum + (Number(item.price) * item.quantity)
     }, 0);
-
     return (
         <Container>
             <section className={styles.cartPage}>
@@ -23,7 +22,9 @@ function CartPage() {
                         <div className={styles.cartList}>
                             {cartItems.map((item) => (
                                 <div key={`${item.productId}-${item.color}-${item.size}`} className={styles.cartItem}>
-
+                                    <div className={styles.imageWrapper}>
+                                        <img src={`${import.meta.env.VITE_BACKEND_URL}${item.mainImage}`} alt={item.name} className={styles.itemImage}/>
+                                    </div>
                                     <div className={styles.itemInfo}>
                                         <h2 className={styles.itemName}>{item.name}</h2>
                                         <p>{Number(item.price).toFixed(2)} PLN</p>
