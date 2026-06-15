@@ -1,3 +1,8 @@
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
 .homePage {
     display: flex;
     flex-direction: column;
@@ -30,6 +35,12 @@
     background-color: var(--color-black);
     color: var(--color-white);
     text-decoration: none;
+    transition: var(--transition-default);
+}
+
+.heroButton:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
 }
 
 .productsSection {

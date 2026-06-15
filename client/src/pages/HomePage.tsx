@@ -28,10 +28,10 @@ function HomePage() {
             <section className={styles.hero}>
                 <h1 className={styles.heroTitle}>VELQOR</h1>
                 <p className={styles.heroSubtitle}>Premium StreetWear For Everyday Movement</p>
-                <Link to="/" className={styles.heroButton}>Shop Now</Link>
+                <a href="#products" className={styles.heroButton}>Shop Now</a>
             </section>
             <Container>
-                <section className={styles.productsSection}>
+                <section id="products" className={styles.productsSection}>
                     <h2 className={styles.sectionTitle}>Featured Products</h2>
                     <div className={styles.productsGrid}>
                         {products.map((product) => (
