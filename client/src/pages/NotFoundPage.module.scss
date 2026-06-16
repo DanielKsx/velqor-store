@@ -1,0 +1,26 @@
+.notFound {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+}
+
+.code {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.text {
+    color: var(--color-gray-600);
+}
+
+.link {
+    margin-top: var(--space-md);
+    padding: var(--space-md) var(--space-xl);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    text-decoration: none;
+}
