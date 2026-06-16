@@ -82,6 +82,11 @@
     gap: var(--space-md);
 }
 
+.helperText {
+    color: var(--color-gray-600);
+    font-size: 0.875rem;
+}
+
 .optionButton {
     padding: var(--space-sm) var(--space-md);
     border: 1px solid var(--color-gray-300);

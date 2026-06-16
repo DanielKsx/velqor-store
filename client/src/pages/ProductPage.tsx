@@ -73,7 +73,7 @@ function ProductPage() {
             <section className={styles.productPage}>
                 <div className={styles.imageSection}>
                     <div className={styles.mainImage}>
-                        <img src={`${import.meta.env.VITE_BACKEND_URL}${selectedProduct.mainImage}`} alt={selectedProduct.name} className={styles.image}/>
+                        <img src={`${import.meta.env.VITE_BACKEND_URL}${selectedProduct.mainImage}`} alt={selectedProduct.name} className={styles.image} />
                     </div>
                 </div>
                 <div className={styles.detailsSection}>
@@ -99,12 +99,18 @@ function ProductPage() {
                                         onClick={() => {
                                             setSelectedColor(color);
                                             setSelectedSize(null);
+                                            setCartError(null);
                                         }}> {color} </button>
                                 ))}
                             </div>
                         </div>
                         <div className={styles.optionGroup}>
                             <p className={styles.optionLabel}>Size</p>
+                            {!selectedColor && (
+                                <p className={styles.helperText}>
+                                    Select a color to view available sizes
+                                </p>
+                            )}
                             <div className={styles.sizeSelector}>
                                 {availableSizes.map((size) => (
                                     <button
