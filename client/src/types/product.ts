@@ -33,5 +33,25 @@ export type Product = {
     createdAt: string;
     updatedAt: string;
     images: ProductImage[];
-    variants: ProductVariant[]; 
+    variants: ProductVariant[];
 }
+
+export type CreateProductData = {
+    sku: string;
+    name: string;
+    slug: string;
+    description: string;
+    price: number;
+    category: ProductCategory;
+    mainImage: string;
+    images: {
+        url: string;
+        alt: string;
+        order: number;
+    }[];
+    variants: {
+        color: ProductColor;
+        size: ProductSize;
+        stock: number;
+    }[];
+};

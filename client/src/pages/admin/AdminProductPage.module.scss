@@ -1,0 +1,37 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.addButton {
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border-radius: var(--radius-sm);
+}
+
+.products {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-md);
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-sm);
+}

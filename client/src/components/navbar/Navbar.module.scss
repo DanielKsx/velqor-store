@@ -23,3 +23,15 @@
     align-items: center;
     gap: var(--space-sm);
 }
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.iconLink {
+    display: flex;
+    align-items: center;
+    font-size: 1.125rem;
+}

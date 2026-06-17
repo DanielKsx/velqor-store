@@ -30,7 +30,7 @@ function CheckoutPage() {
     );
 }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         setIsSubmitting(true);

@@ -1,0 +1,82 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.subtitle {
+    margin-top: var(--space-xs);
+    color: var(--color-gray-500);
+}
+
+.form {
+    padding: var(--space-xl);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-md);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-white);
+}
+
+.formGroup textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.primaryButton,
+.secondaryButton {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+}
+
+.primaryButton {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.secondaryButton {
+    border: 1px solid var(--color-gray-300);
+    color: var(--color-black);
+}
+
+.error {
+    margin-bottom: var(--space-md);
+    color: red;
+}
