@@ -37,6 +37,9 @@ The main goal of this project was to practice building a complete full stack app
 * Keep the cart between sessions
 * Place orders through the checkout page
 * View order confirmation after checkout
+* Change product quantities in the cart
+* Add notes to products before ordering
+* Review the full order summary before checkout
 
 ---
 
@@ -45,19 +48,10 @@ The main goal of this project was to practice building a complete full stack app
 The project includes protected admin endpoints that allow:
 
 * Logging in as an administrator
-* Viewing all orders
-* Viewing order details
-* Updating order status
+* Managing products
+* Viewing orders through protected API endpoints
+* Updating order status through protected API endpoints
 
-### Demo Admin Credentials
-
-Demo credentials are configured through environment variables and database seed.
-
-### Admin Login Endpoint
-
-```http
-POST /api/auth/admin/login
-```
 
 ---
 
@@ -125,6 +119,12 @@ POST /api/auth/admin/logout
 GET /api/admin/orders
 GET /api/admin/orders/:id
 PATCH /api/admin/orders/:id/status
+
+GET /api/admin/products
+GET /api/admin/products/:id
+POST /api/admin/products
+PATCH /api/admin/products/:id
+DELETE /api/admin/products/:id
 ```
 
 ---
@@ -263,9 +263,8 @@ velqor-store
 
 This project focuses on the core e-commerce flow. Some features that could be added in the future:
 
+* Admin dashboard analytics
 * Product images per color variant
-* Admin dashboard UI
-* Product management
 * Image uploads
 * Inventory management
 * Payment integration
