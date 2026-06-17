@@ -1,9 +1,10 @@
-import { Controller, Body, Post, Res } from '@nestjs/common';
+import { Controller, Body, Post, Res, Get, UseGuards, Req } from '@nestjs/common';
 import { AdminLoginDto } from './dto/admin-login.dto';
 import { AuthService } from './auth.service';
-import type { Response } from 'express';
 import { ADMIN_ACCESS_TOKEN_COOKIE } from './constants/auth.constants';
 import { Throttle } from '@nestjs/throttler';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import type { Request, Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -35,5 +36,11 @@ export class AuthController {
         response.clearCookie(ADMIN_ACCESS_TOKEN_COOKIE);
 
         return this.authService.adminLogout();
+    }
+
+    @Get('admin/me')
+    @UseGuards(JwtAuthGuard)
+    getCurrentAdmin(@Req() request: Request){
+        return request.user;
     }
 }
