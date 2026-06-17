@@ -18,6 +18,13 @@ type RemoveCartItemPayload = {
     size: string;
 }
 
+type UpdateCartItemNotePayload = {
+    productId: string;
+    color: string;
+    size: string;
+    note: string;
+};
+
 const initialState: CartItem[] = [];
 const cartSlice = createSlice({
     name: 'cart',
@@ -49,13 +56,51 @@ const cartSlice = createSlice({
             });
         },
 
-        clearCart(){
-            return[];
+        clearCart() {
+            return [];
+        },
+
+        updateCartItemQuantity(
+            state,
+            action: PayloadAction<{
+                productId: string;
+                color: string;
+                size: string;
+                quantity: number;
+            }>
+        ) {
+            const item = state.find((cartItem) => {
+                return (
+                    cartItem.productId === action.payload.productId &&
+                    cartItem.color === action.payload.color &&
+                    cartItem.size === action.payload.size
+                );
+            });
+
+            if (item) {
+                item.quantity = action.payload.quantity;
+            }
+        },
+
+        updateCartItemNote(state, action: PayloadAction<UpdateCartItemNotePayload>) {
+            const item = state.find((cartItem) => {
+                return (
+                    cartItem.productId === action.payload.productId &&
+                    cartItem.color === action.payload.color &&
+                    cartItem.size === action.payload.size
+                );
+            });
+
+            if (item) {
+                item.note = action.payload.note;
+            }
         },
     }
+
+
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, updateCartItemQuantity, updateCartItemNote } = cartSlice.actions;
 
 
 export default cartSlice.reducer;

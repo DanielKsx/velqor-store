@@ -15,6 +15,38 @@
     gap: var(--space-lg);
 }
 
+.orderSummary {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-gray-300);
+    background-color: var(--color-white);
+}
+
+.orderSummary h2 {
+    margin-bottom: var(--space-lg);
+}
+
+.summaryList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.summaryItem {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.summaryTotal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-lg);
+    font-size: 1.125rem;
+}
+
 .formGroup {
     display: flex;
     flex-direction: column;
@@ -116,4 +148,10 @@
 .submitError {
     color: var(--color-gray-900);
     font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .summaryItem {
+        flex-direction: column;
+    }
 }

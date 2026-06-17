@@ -28,7 +28,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-lg);
     margin-bottom: var(--space-lg);
 }
@@ -79,4 +79,40 @@
 .error {
     margin-bottom: var(--space-md);
     color: red;
+}
+
+
+@media (max-width: 768px) {
+    .page {
+        gap: var(--space-lg);
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .form {
+        padding: var(--space-lg);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .primaryButton,
+    .secondaryButton {
+        width: 100%;
+    }
 }

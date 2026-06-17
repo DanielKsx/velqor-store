@@ -69,3 +69,29 @@
     border-top: 1px solid var(--color-gray-300);
     color: var(--color-gray-500);
 }
+
+@media (max-width: 768px) {
+    .adminLayout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: var(--space-lg);
+    }
+
+    .nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--space-lg);
+    }
+
+    .header {
+        height: auto;
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .main {
+        padding: var(--space-lg);
+    }
+}

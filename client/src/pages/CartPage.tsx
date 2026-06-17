@@ -1,8 +1,8 @@
 import styles from './CartPage.module.scss'
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Container from "../components/container/Container";
-import { removeFromCart } from "../store/slices/cartSlice";
 import { Link } from 'react-router-dom';
+import { removeFromCart, updateCartItemQuantity, updateCartItemNote } from '../store/slices/cartSlice';
 
 function CartPage() {
     const cartItems = useAppSelector((state) => state.cart);
@@ -23,14 +23,50 @@ function CartPage() {
                             {cartItems.map((item) => (
                                 <div key={`${item.productId}-${item.color}-${item.size}`} className={styles.cartItem}>
                                     <div className={styles.imageWrapper}>
-                                        <img src={`${import.meta.env.VITE_BACKEND_URL}${item.mainImage}`} alt={item.name} className={styles.itemImage}/>
+                                        <img src={`${import.meta.env.VITE_BACKEND_URL}${item.mainImage}`} alt={item.name} className={styles.itemImage} />
                                     </div>
                                     <div className={styles.itemInfo}>
                                         <h2 className={styles.itemName}>{item.name}</h2>
                                         <p>{Number(item.price).toFixed(2)} PLN</p>
                                         <p className={styles.itemMeta}>Color: {item.color}</p>
                                         <p className={styles.itemMeta}>Size: {item.size}</p>
-                                        <p className={styles.itemMeta}>Quantity: {item.quantity}</p>
+                                        <div className={styles.quantityControl}>
+                                            <span className={styles.quantityLabel}>Quantity:</span>
+                                            <button type="button" className={styles.quantityButton} onClick={() => {
+                                                if (item.quantity <= 1) return;
+                                                dispatch(updateCartItemQuantity({
+                                                    productId: item.productId,
+                                                    color: item.color,
+                                                    size: item.size,
+                                                    quantity: item.quantity - 1,
+                                                }));
+                                            }}
+                                            > - </button>
+                                            <span className={styles.quantityValue}>{item.quantity}</span>
+                                            <button type="button" className={styles.quantityButton} onClick={() => {
+                                                dispatch(updateCartItemQuantity({
+                                                    productId: item.productId,
+                                                    color: item.color,
+                                                    size: item.size,
+                                                    quantity: item.quantity + 1,
+                                                }));
+                                            }}
+                                            > + </button>
+                                        </div>
+                                        <div className={styles.noteGroup}>
+                                            <label htmlFor={`note-${item.productId}-${item.color}-${item.size}`}> Note: </label>
+                                            <textarea id={`note-${item.productId}-${item.color}-${item.size}`} value={item.note} maxLength={300}
+                                                placeholder="Add a note for this product..."
+                                                onChange={(event) => {
+                                                    dispatch(updateCartItemNote({
+                                                        productId: item.productId,
+                                                        color: item.color,
+                                                        size: item.size,
+                                                        note: event.target.value,
+                                                    }));
+                                                }}
+                                            />
+                                        </div>
                                     </div>
 
                                     <div className={styles.itemActions}>

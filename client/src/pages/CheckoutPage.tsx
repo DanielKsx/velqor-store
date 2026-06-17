@@ -17,18 +17,21 @@ function CheckoutPage() {
 
     const cartItems = useAppSelector((state) => state.cart);
     const dispatch = useAppDispatch();
+    const totalPrice = cartItems.reduce((sum, item) => {
+        return sum + Number(item.price) * item.quantity;
+    }, 0);
 
     if (cartItems.length === 0 && !isSuccess) {
-    return (
-        <Container>
-            <section className={styles.emptyCheckout}>
-                <h1>Your cart is empty</h1>
-                <p>Add products to your cart before checkout.</p>
-                <Link to="/" className={styles.continueShoppingButton}>Continue Shopping</Link>
-            </section>
-        </Container>
-    );
-}
+        return (
+            <Container>
+                <section className={styles.emptyCheckout}>
+                    <h1>Your cart is empty</h1>
+                    <p>Add products to your cart before checkout.</p>
+                    <Link to="/" className={styles.continueShoppingButton}>Continue Shopping</Link>
+                </section>
+            </Container>
+        );
+    }
 
     const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -85,6 +88,29 @@ function CheckoutPage() {
         <Container>
             <section className={styles.checkoutPage}>
                 <h1 className={styles.checkoutTitle}>Checkout</h1>
+                <div className={styles.orderSummary}>
+                    <h2>Order summary</h2>
+                    <div className={styles.summaryList}>
+                        {cartItems.map((item) => (
+                            <div key={`${item.productId}-${item.color}-${item.size}`} className={styles.summaryItem}>
+                                <div>
+                                    <h3>{item.name}</h3>
+                                    <p> {item.color} / {item.size} / Qty: {item.quantity}</p>
+                                    {item.note && (
+                                        <p>Note: {item.note}</p>
+                                    )}
+                                </div>
+                                <p> {(Number(item.price) * item.quantity).toFixed(2)} PLN</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className={styles.summaryTotal}>
+                        <span>Total</span>
+                        <strong>{totalPrice.toFixed(2)} PLN</strong>
+                    </div>
+                </div>
+
                 <form className={styles.checkoutForm} onSubmit={handleSubmit}>
 
                     <div className={styles.formGroup}>
@@ -104,7 +130,7 @@ function CheckoutPage() {
 
                     <div className={styles.formGroup}>
                         <label htmlFor="customerAddress" className={styles.label}>Address</label>
-                        <textarea id="customerAddress" className={styles.textarea} value={customerAddress} onChange={(event) => setCustomerAddress(event.target.value)} placeholder="Street, city, postal code" required/>
+                        <textarea id="customerAddress" className={styles.textarea} value={customerAddress} onChange={(event) => setCustomerAddress(event.target.value)} placeholder="Street, city, postal code" required />
                     </div>
 
                     <button type="submit" className={styles.submitButton} disabled={isSubmitting}>{isSubmitting ? 'Placing order...' : 'Place order'}</button>
