@@ -10,19 +10,20 @@ import type { Request, Response } from 'express';
 export class AuthController {
     constructor(private readonly authService: AuthService) { }
 
-    @Throttle({ default: { limit: 5, ttl: 60000 }})
+    @Throttle({ default: { limit: 5, ttl: 60000 } })
     @Post('admin/login')
     async adminLogin(
         @Body() adminLoginDto: AdminLoginDto,
         @Res({ passthrough: true }) response: Response,
     ) {
-
         const { accessToken } = await this.authService.adminLogin(adminLoginDto);
+
+        const isProduction = process.env.NODE_ENV === 'production';
 
         response.cookie(ADMIN_ACCESS_TOKEN_COOKIE, accessToken, {
             httpOnly: true,
-            sameSite: 'lax',
-            secure: process.env.NODE_ENV === 'production',
+            sameSite: isProduction ? 'none' : 'lax',
+            secure: isProduction,
             maxAge: 1000 * 60 * 60 * 12,
         });
 
@@ -32,15 +33,20 @@ export class AuthController {
     }
 
     @Post('admin/logout')
-    adminLogout(@Res({ passthrough: true }) response: Response ){
-        response.clearCookie(ADMIN_ACCESS_TOKEN_COOKIE);
+    adminLogout(@Res({ passthrough: true }) response: Response) {
+        const isProduction = process.env.NODE_ENV === 'production';
+
+        response.clearCookie(ADMIN_ACCESS_TOKEN_COOKIE, {
+            sameSite: isProduction ? 'none' : 'lax',
+            secure: isProduction,
+        });
 
         return this.authService.adminLogout();
     }
 
     @Get('admin/me')
     @UseGuards(JwtAuthGuard)
-    getCurrentAdmin(@Req() request: Request){
+    getCurrentAdmin(@Req() request: Request) {
         return request.user;
     }
 }
