@@ -175,6 +175,9 @@ export class OrdersService {
             data: {
                 status: updateOrderStatusDto.status,
             },
+            include: {
+                items: true,
+            },
         });
     }
 }
