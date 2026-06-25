@@ -61,28 +61,33 @@ function AdminProductsPage() {
     }
 
     return (
-        <section>
-            <div className={styles.header}>
-                <h1 className={styles.title}>Products</h1>
-                <Link to="/admin/products/new" className={styles.addButton}>Add Product</Link>
-            </div>
-            <div className={styles.products}>
-                {products.map((product) => (
-                    <article key={product.id} className={styles.card}>
+    <section>
+        <div className={styles.header}>
+            <h1 className={styles.title}>Products</h1>
+            <Link to="/admin/products/new" className={styles.addButton}>Add Product</Link>
+        </div>
+        <div className={styles.products}>
+            {products.map((product) => (
+                <article key={product.id} className={styles.card}>
+                    <div className={styles.productMain}>
+                        <div className={styles.imageWrapper}>
+                            <img src={`${import.meta.env.VITE_BACKEND_URL}${product.mainImage}`} alt={product.name} className={styles.productImage}/>
+                        </div>
                         <div>
-                            <h2>{product.name}</h2>
-                            <p>SKU: {product.sku}</p>
-                            <p>${product.price}</p>
+                            <h2 className={styles.productName}>{product.name}</h2>
+                            <p className={styles.productMeta}>SKU: {product.sku}</p>
+                            <p className={styles.productPrice}> ${Number(product.price).toFixed(2)}</p>
                         </div>
-                        <div className={styles.actions}>
-                            <Link to={`/admin/products/${product.id}/edit`}> Edit </Link>
-                            <button type="button" onClick={() => handleDelete(product.id)}>Delete</button>
-                        </div>
-                    </article>
-                ))}
-            </div>
-        </section>
-    );
+                    </div>
+                    <div className={styles.actions}>
+                        <Link to={`/admin/products/${product.id}/edit`} className={styles.editButton} > Edit </Link>
+                        <button type="button" className={styles.deleteButton} onClick={() => handleDelete(product.id)}> Delete </button>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </section>
+);
 }
 
 export default AdminProductsPage;

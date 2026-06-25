@@ -13,7 +13,15 @@
     padding: var(--space-sm) var(--space-md);
     background-color: var(--color-black);
     color: var(--color-white);
+    border: 1px solid var(--color-black);
     border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: var(--transition-default);
+}
+
+.addButton:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
 }
 
 .products {
@@ -25,13 +33,91 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--space-lg);
     padding: var(--space-lg);
     background-color: var(--color-white);
     border: 1px solid var(--color-gray-300);
     border-radius: var(--radius-md);
 }
 
+.productMain {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.imageWrapper {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+}
+
+.productImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-gray-300);
+}
+
+.productName {
+    margin-bottom: var(--space-xs);
+}
+
+.productMeta {
+    color: var(--color-gray-500);
+    margin-bottom: var(--space-xs);
+}
+
+.productPrice {
+    font-weight: 700;
+}
+
 .actions {
     display: flex;
     gap: var(--space-sm);
+}
+
+.editButton,
+.deleteButton {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-black);
+    background: var(--color-white);
+    color: var(--color-black);
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition-default);
+    font: inherit;
+}
+
+.editButton:hover {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.deleteButton {
+    border-color: #c62828;
+    color: #c62828;
+}
+
+.deleteButton:hover {
+    background-color: #c62828;
+    color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .productMain {
+        width: 100%;
+    }
+
+    .actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
 }

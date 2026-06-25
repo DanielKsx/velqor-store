@@ -33,3 +33,14 @@ export async function logout() {
     }
 }
 
+export async function getCurrentAdmin() {
+    const response = await fetch(`${API_URL}/auth/admin/me`, {
+        credentials: "include",
+    });
+
+    if (!response.ok) {
+        throw new Error("Unauthorized");
+    }
+
+    return response.json();
+}

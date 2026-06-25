@@ -1,0 +1,106 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.backButton {
+    align-self: flex-start;
+    color: var(--color-black);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-default);
+}
+
+.backButton:hover {
+    text-decoration: underline;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.topSection {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-md);
+}
+
+.sectionTitle {
+    margin-bottom: var(--space-sm);
+    font-size: 1.25rem;
+}
+
+.section p {
+    margin: 0;
+    line-height: 1.7;
+}
+
+.statusSelect {
+    width: 220px;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-white);
+    font: inherit;
+    transition: var(--transition-default);
+}
+
+.statusSelect:focus {
+    outline: none;
+    border-color: var(--color-black);
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.itemCard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-sm);
+}
+
+.itemCard h3 {
+    margin: 0 0 var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.note {
+    margin-top: var(--space-sm);
+    padding: var(--space-sm);
+    border-left: 4px solid var(--color-black);
+    background-color: var(--color-gray-100);
+    border-radius: var(--radius-sm);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .topSection {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: var(--space-md);
+    }
+
+    .statusSelect {
+        width: 100%;
+    }
+}

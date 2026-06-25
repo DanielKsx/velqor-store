@@ -10,6 +10,7 @@ function Navbar() {
     const totalItem = cartItems.reduce((sum, item) => {
         return sum + item.quantity;
     }, 0);
+    const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
     return (
         <header className={styles.header}>
@@ -17,7 +18,7 @@ function Navbar() {
                 <nav className={styles.nav}>
                     <Link to="/" className={styles.logo}>  VELQOR </Link>
                     <div className={styles.actions}>
-                        <Link to="/login" className={styles.iconLink}>
+                        <Link to={isAuthenticated ? "/admin/products" : "/login"}  className={styles.iconLink}>
                             <i className="fa-solid fa-user"></i>
                         </Link>
                         <Link to="/cart" className={styles.cartLink}>

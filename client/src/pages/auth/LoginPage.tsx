@@ -2,17 +2,21 @@ import Container from "../../components/container/Container";
 import styles from "./LoginPage.module.scss"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/authApi";
+import { login, getCurrentAdmin } from "../../api/authApi";
+import { useAppDispatch } from "../../store/hooks";
+import { setAdmin } from "../../store/slices/authSlice";
 
 function LoginPage() {
 
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
-    const navigate = useNavigate();
 
-  
+
+
 
     async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -22,6 +26,8 @@ function LoginPage() {
             setError("");
 
             await login({ email, password });
+            const admin = await getCurrentAdmin();
+            dispatch(setAdmin(admin));
             navigate("/admin/products");
         } catch {
             setError("Invalid email or password");

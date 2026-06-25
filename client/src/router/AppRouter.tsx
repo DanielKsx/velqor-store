@@ -10,6 +10,8 @@ import AdminProductsPage from "../pages/admin/AdminProductsPage";
 import AdminLayout from "../layouts/AdminLayout";
 import CreateProductPage from "../pages/admin/CreateProductPage";
 import EditProductPage from "../pages/admin/EditProductPage";
+import AdminOrdersPage from "../pages/admin/AdminOrdersPage";
+import AdminOrderDetailsPage from "../pages/admin/AdminOrdersDetailsPage";
 
 export const router = createBrowserRouter([
     {
@@ -50,6 +52,14 @@ export const router = createBrowserRouter([
             {
                 path: "products",
                 element: <AdminProductsPage />,
+            },
+            {
+                path: "orders",
+                element: <AdminOrdersPage />
+            },
+            {
+                path: "orders/:id",
+                element: <AdminOrderDetailsPage />
             },
             {
                 path: "products/new",
