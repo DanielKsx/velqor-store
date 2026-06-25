@@ -4,14 +4,17 @@ VELQOR is a full stack e-commerce application built as a portfolio project.
 
 The goal of the project was to build a complete online store from scratch, including product browsing, cart management, checkout flow, order processing and secured admin endpoints.
 
-The application was built using React, NestJS, Prisma and MariaDB.
+The application was built using React, TypeScript, NestJS, Prisma and MariaDB.
 
 ---
 
 ## Live Demo:
+
+Frontend:
 https://velqor-store.onrender.com
 
-## API:
+
+Backend API:
 https://velqor-api-bptu.onrender.com/api/products
 
 ## Project Goals
@@ -25,6 +28,8 @@ The main goal of this project was to practice building a complete full stack app
 * Database design
 * API development
 * Application security
+* State management
+* REST API design
 
 ---
 
@@ -36,6 +41,7 @@ The main goal of this project was to practice building a complete full stack app
 * Add products to the cart
 * Keep the cart between sessions
 * Place orders through the checkout page
+* Browse responsive storefront on desktop and mobile
 * View order confirmation after checkout
 * Change product quantities in the cart
 * Add notes to products before ordering
@@ -43,14 +49,15 @@ The main goal of this project was to practice building a complete full stack app
 
 ---
 
-## Admin API
+## Admin Panel
 
-The project includes protected admin endpoints that allow:
+The project includes a protected administration panel that allows:
 
-* Logging in as an administrator
-* Managing products
-* Viewing orders through protected API endpoints
-* Updating order status through protected API endpoints
+* Administrator authentication
+* Product management (create, edit and delete)
+* Order management
+* Updating order statuses
+
 
 
 ---
@@ -97,6 +104,8 @@ Security features implemented in the project:
 * Prisma transactions
 * Backend-side order price calculation
 * Product snapshots stored in orders
+* Session restoration using secure httpOnly cookies
+* Protected admin routes
 
 ---
 
@@ -115,6 +124,7 @@ POST /api/orders
 ```http
 POST /api/auth/admin/login
 POST /api/auth/admin/logout
+GET /api/auth/admin/me
 
 GET /api/admin/orders
 GET /api/admin/orders/:id
