@@ -12,7 +12,10 @@ export async function login(data: LoginData) {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+            email: data.email.trim().toLowerCase(),
+            password: data.password.trim(),
+        }),
     });
 
     if (!response.ok) {
